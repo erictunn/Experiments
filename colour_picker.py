@@ -1,4 +1,4 @@
-'''Quick file for finding mouse pos, colour it is on etc'''
+"Recreating basic colour picker using python, featuring pyautogui and pynput."
 
 import pyautogui
 from pynput import keyboard
@@ -20,9 +20,9 @@ def wait(key):
     try:
         if key == keyboard.Key.ctrl_l:
             find_rgb_val()
-            return False  # Exit listener
+            return False
     except AttributeError:
-        pass  # Ignore unknown keys
+        pass
     return True
 
 if __name__ == "__main__":
