@@ -1,2 +1,2 @@
-Collection of mini projects.
-Each project helped me learn about a certain library I had not used before, and helped me practice good code.
+Collection of mini projects and experiments into using new libraries.  
+The graphs folder contains various mathematical graphs, such as tetration of i, that I have coded for fun or to assist learning a concept.  

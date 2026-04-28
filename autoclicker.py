@@ -17,9 +17,9 @@ class Clicker:
             if self.running:
                 print("Clicking...")
                 pyautogui.leftClick()
-                time.sleep(0.1)
+                time.sleep(0.05)
             else:
-                time.sleep(0.01)  # Sleep briefly when not running to avoid busy waiting
+                time.sleep(0.1)  # Sleep briefly when not running to avoid busy waiting
 
     def on_press(self, key):
         """Handle keyboard input to control clicker and exit."""
