@@ -16,6 +16,7 @@ class BasePlotData:
     yscale: str = "linear"
     save_path: str | None = None
     save_dpi: int = 300
+    export_clean: bool = False
 
 
 @dataclass
@@ -73,7 +74,7 @@ class Grapher:
         plt.show()
 
     def _graph_image(self, data: ImagePlotData) -> None:
-        fig, ax = plt.subplots()
+        fig, ax = self._create_image_figure(data)
         image = ax.imshow(
             data.image,
             cmap=data.cmap,
@@ -82,9 +83,10 @@ class Grapher:
             origin=data.origin,
         )
 
-        ax.set_title(data.title)
-        ax.set_xlabel(data.x_label)
-        ax.set_ylabel(data.y_label)
+        if not data.export_clean:
+            ax.set_title(data.title)
+            ax.set_xlabel(data.x_label)
+            ax.set_ylabel(data.y_label)
         ax.set_xscale(data.xscale)
         ax.set_yscale(data.yscale)
         ax.axis(data.axis)
@@ -101,10 +103,24 @@ class Grapher:
             return
 
         save_kwargs: dict[str, str | int] = {"dpi": data.save_dpi}
-        if data.axis == "off":
+        if data.axis == "off" and not data.export_clean:
             save_kwargs["bbox_inches"] = "tight"
             save_kwargs["pad_inches"] = 0
 
         path = Path(data.save_path)
         path.parent.mkdir(parents=True, exist_ok=True)
         fig.savefig(path, **save_kwargs)
+
+    @staticmethod
+    def _create_image_figure(data: ImagePlotData) -> tuple[plt.Figure, plt.Axes]:
+        if data.export_clean and data.save_path:
+            height_px, width_px = data.image.shape[:2]
+            fig = plt.figure(
+                figsize=(width_px / data.save_dpi, height_px / data.save_dpi),
+                dpi=data.save_dpi,
+                frameon=False,
+            )
+            ax = fig.add_axes([0, 0, 1, 1])
+            return fig, ax
+
+        return plt.subplots()
