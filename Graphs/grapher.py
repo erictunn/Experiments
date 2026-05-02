@@ -92,7 +92,7 @@ class Grapher:
         ax.axis(data.axis)
 
         if data.show_colorbar:
-            fig.colorbar(image, ax=ax, label="Escape iteration")
+            fig.colorbar(image, ax=ax, label="Smooth escape time")
 
         self._save_if_requested(fig, data)
         plt.show()

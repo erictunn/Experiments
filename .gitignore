@@ -1,2 +1,5 @@
 __pycache__/
 .DS_Store
+build/
+Graphs/graphs_maths/julia_lib.cpython-311-darwin.so
+Graphs/graphs_maths/mandel_lib.cpython-311-darwin.so
