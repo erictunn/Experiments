@@ -2,25 +2,13 @@
 
 from grapher import ImagePlotData
 from graphs_maths.math_graph import MathGraph
+from .input_helper import get_cmap
+
 from . import julia_lib
 
 
 class JuliaGraph(MathGraph):
     """Starter implementation for plotting Julia sets."""
-
-    COLOUR_MAPS = {
-        "1": "twilight_shifted",
-        "2": "inferno",
-        "3": "magma",
-        "4": "flag",
-        "5": "plasma",
-        "6": "turbo",
-        "7": "spectral",
-        "8": "cividis",
-        "9": "cubehelix",
-        "10": "cool",
-    }
-
 
     def generate_data(self) -> ImagePlotData:
         max_iterations = int(input("Enter the maximum number of iterations for the Julia set: "))
@@ -29,23 +17,9 @@ class JuliaGraph(MathGraph):
         c_real = float(input("Enter the real part for the Julia constant c (e.g. -0.8): "))
         c_imag = float(input("Enter the imaginary part for the Julia constant c (e.g. 0.156): "))
 
-        cmap_choice = input(
-            "Choose a colour scheme:"
-            "\n1: twilight_shifted"
-            "\n2: inferno"
-            "\n3: magma"
-            "\n4: flag"
-            "\n5: plasma"
-            "\n6: turbo"
-            "\n7: spectral"
-            "\n8: cividis"
-            "\n9: cubehelix"
-            "\n10: cool"
-            "\nPress Enter for default (twilight_shifted): "
-        ).strip()
 
         save_path = input("Optional PNG output path (leave blank to skip saving): ").strip() or None
-        cmap = self.COLOUR_MAPS.get(cmap_choice, "twilight_shifted")
+        cmap = get_cmap() if not None else "twilight_shifted"
 
         x_centre = 0.0
         y_centre = 0.0

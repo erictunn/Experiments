@@ -1,4 +1,7 @@
-"""Build the Mandelbrot C++ extension."""
+"""Build the Mandelbrot and Julia C++ extension."""
+# Build from this folder with:
+# python3 setup.py build_ext --inplace
+
 
 from pathlib import Path
 
